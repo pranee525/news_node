@@ -87,8 +87,8 @@ async function checkAndMakeApiCalls() {
 }
 function start() {
   // Run the checkAndMakeApiCalls method every 20 minutes
-  setInterval(checkAndMakeApiCalls, 20 * 60 * 1000);
-  //checkAndMakeApiCalls();
+ // setInterval(checkAndMakeApiCalls, 20 * 60 * 1000);
+  checkAndMakeApiCalls();
 }
 
 
