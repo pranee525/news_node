@@ -35,7 +35,7 @@ const articleController = {
 
   getAllArticles: async () => {
     try {
-      const articles = await Article.find();
+      const articles = await Article.find().sort({published_at: -1}).limit(100);
       return articles;
     } catch (error) {
       throw new Error(error.message);
