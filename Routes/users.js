@@ -3,12 +3,15 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../Models/users');
+const countryInsert=require('../DAL/country');
 
 // Add a new user
 router.post('/', async (req, res) => {
   try {
     const newUser = new User(req.body);
     const savedUser = await newUser.save();
+    console.log(newUser.selectedCountries);
+    countryInsert.checkAndInsertCountryToScrpe(newUser.selectedCountries);
     res.status(201).json(savedUser);
   } catch (error) {
     res.status(400).json({ error: error.message });

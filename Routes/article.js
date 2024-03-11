@@ -44,6 +44,15 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+router.get('/after/:id', async (req, res) => {
+  try {
+    const articles = await articleController.getArticlesAfterId(req.params.id);
+    res.json(articles);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 // Get a specific article by ID
 router.get('/:id', async (req, res) => {

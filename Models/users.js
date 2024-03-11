@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  selectedCountries:{
+    type:String
+
   }
 });
 

@@ -1,4 +1,5 @@
 const Country = require('../Models/countries');
+const scrapeCountry = require('../Models/scrapeCountries')
 
 const countryController = {
   saveCountry: async (countryData) => {
@@ -53,6 +54,31 @@ const countryController = {
       throw new Error(error.message);
     }
   },
+  checkAndInsertCountryToScrpe: async (countryList) => {
+
+    try {
+      const result = countryList.split(',');
+      for (const value of result) {
+        
+          const query = { country_code: value } ;
+        const existingValue = await scrapeCountry.findOne(query);
+        if (!existingValue) {
+          const valToInsert=new scrapeCountry( {
+            country_code:value
+          });
+          // If the value does not exist, insert it into the collection
+          await valToInsert.save(valToInsert);
+          console.log(`Inserted ${value} into the collection.`);
+        }
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    }
+
+
+  }
+
+
 };
 
 module.exports = countryController;
