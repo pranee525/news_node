@@ -36,6 +36,9 @@ const countryController = {
 
   getAllCountries: async () => {
     try {
+
+     
+
       const countries = await Country.find();
       return countries;
     } catch (error) {
@@ -45,6 +48,8 @@ const countryController = {
 
   getCountryById: async (id) => {
     try {
+      
+
       const country = await Country.findById(id);
       if (!country) {
         throw new Error('Country not found');
@@ -77,6 +82,8 @@ const countryController = {
 
 
   }
+
+
 
 
 };

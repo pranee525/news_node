@@ -64,4 +64,15 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
+//get articles by userid
+router.get('/articleForUser/:id', async (req, res) => {
+  try {
+    const articles = await articleController.getArticlesByUserId(req.params.id);
+    res.json(articles);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+});
+
 module.exports = router;
