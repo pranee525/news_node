@@ -38,6 +38,7 @@ router.delete('/:id', async (req, res) => {
 // Get all countries
 router.get('/', async (req, res) => {
   try {
+    
     const countries = await countryController.getAllCountries();
     res.json(countries);
   } catch (error) {

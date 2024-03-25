@@ -1,4 +1,5 @@
 const Article = require('../Models/article');
+const users=require('../Models/users');
 
 const articleController = {
   saveArticle: async (articleData) => {
@@ -55,6 +56,29 @@ const articleController = {
   getArticleById: async (id) => {
     try {
       const article = await Article.findById(id);
+      if (!article) {
+        throw new Error('Article not found');
+      }
+      return article;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  getArticlesByUserId: async (id) => {
+    try {
+   
+      const user = await User.findById(id);
+  
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      const selectedCountries=user.selectedCountries;
+      console.log(selectedCountries);
+      const article = await Article.find({country_id:{$in:selectedCountries}}).sort({published_at: -1}).limit(100);
+  
+      //res.json(user);
+      //const article = await Article.findById(id);
       if (!article) {
         throw new Error('Article not found');
       }
