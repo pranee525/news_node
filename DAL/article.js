@@ -76,7 +76,7 @@ const articleController = {
       const selectedCountries=user.selectedCountries;
       const getCountryids=countries.find({country_code:{$in:selectedCountries}});
       console.log(selectedCountries);
-      const article = await Article.find({country_id:{$in:getCountryids}}).sort({published_at: -1}).limit(100);
+      const article = await Article.find({language_id:{$in:selectedCountries}}).sort({published_at: -1}).limit(100);
 
   
       //res.json(user);
