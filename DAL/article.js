@@ -1,6 +1,6 @@
 const Article = require('../Models/article');
 const users=require('../Models/users');
-
+const countries=require('../Models/countries');
 const articleController = {
   saveArticle: async (articleData) => {
     try {
@@ -74,8 +74,10 @@ const articleController = {
       }
 
       const selectedCountries=user.selectedCountries;
+      const getCountryids=countries.find({country_code:{$in:selectedCountries}});
       console.log(selectedCountries);
-      const article = await Article.find({country_id:{$in:selectedCountries}}).sort({published_at: -1}).limit(100);
+      const article = await Article.find({country_id:{$in:getCountryids}}).sort({published_at: -1}).limit(100);
+
   
       //res.json(user);
       //const article = await Article.findById(id);
