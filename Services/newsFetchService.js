@@ -11,6 +11,12 @@ async function makeApiCall(apiRequestManager) {
     const currentTime = moment();
     const lastRequestedTime = moment(apiRequestManager.lastRequestedOn);
     const requestIntervalInMinutes = apiRequestManager.requestIntervalInMins;
+    //write code to reset currentRequestCount to 0 if lastRequestedTime is not today
+    if (currentTime.diff(lastRequestedTime, 'days') > 0) {  // If the last requested time is not today
+      apiRequestManager.currentRequestCount = 0;  // Reset the currentRequestCount to 0
+      //update the database with the new currentRequestCount
+      await apiRequestManager.save();
+    }
 
     if (
       currentTime.diff(lastRequestedTime, 'minutes') >= requestIntervalInMinutes &&
@@ -135,7 +141,7 @@ async function fetchDataFromCurrentsApi() {
     const data = response.data;
     return data;
   } catch (error) {
-    throw new Error(`Error fetching data from the Currents API: ${error.message}`);
+    throw new Error(`Error fetching data from the Currents API: ${error}`);
   }
 }
 

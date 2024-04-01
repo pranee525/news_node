@@ -16,6 +16,7 @@ function transformJsonToArticle(jsonData) {
     language_id: jsonData.language, // Assuming you have a function to get language_id based on language
     category_id: jsonData.category, // Assuming you have a function to get category_id(s) based on category
     published_at: new Date(jsonData.published_at),
+    country_id: jsonData.country!=null?jsonData.country:null, // Assuming you have a function to get country_id based on country
   };
 
   return new Article(articleData);

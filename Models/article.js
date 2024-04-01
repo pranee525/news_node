@@ -37,7 +37,7 @@ const articleSchema = new mongoose.Schema({
     type: Number,
   },
   country_id: {
-    type: Number,
+    type: String,
   },
   published_at: {
     type: Date,
