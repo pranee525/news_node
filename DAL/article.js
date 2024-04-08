@@ -74,6 +74,7 @@ const articleController = {
       }
 
       const selectedCountries=user.selectedCountries;
+     
       //fetch articles that contain country_id in selectedCountries
       const article = await Article.find({country_id:{$in:selectedCountries.toLowerCase().split(',')}}).sort({published_at: -1}).limit(100);
 
@@ -88,6 +89,28 @@ const articleController = {
       throw new Error(error.message);
     }
   },
-};
 
+ getRemainingArticlesByUserId: async (id,articleId) => {
+
+    try {
+      const user = await users.findById(id);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      const selectedCountries=user.selectedCountries;
+      const query = { _id: { $lt: articleId },country_id:{$in:selectedCountries.toLowerCase().split(',')}};
+      
+      //fetch articles that contain country_id in selectedCountries
+      const article = await Article.find(query).sort({published_at: -1}).limit(100);
+      //res.json(user);
+      //const article = await Article.findById(id);
+      if (!article) {
+        throw new Error('Article not found');
+      }
+      return article;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+ };
 module.exports = articleController;

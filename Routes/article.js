@@ -75,4 +75,14 @@ router.get('/articleForUser/:id', async (req, res) => {
   }
 });
 
+//get remaining articles for user by userid and last read articleid
+router.get('/getNextArticles/:id/:articleId', async (req, res) => {
+  try {
+    const articles = await articleController.getRemainingArticlesByUserId(req.params.id,req.params.articleId);
+    res.json(articles);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+});
+
 module.exports = router;
