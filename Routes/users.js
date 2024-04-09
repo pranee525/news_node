@@ -9,6 +9,8 @@ const countryInsert=require('../DAL/country');
 router.post('/', async (req, res) => {
   try {
     const newUser = new User(req.body);
+    newUser.email=newUser.email!=""?newUser.email:"user"+new Date().getTime()+"@headlinez.com";
+    newUser.password=newUser.password!=""?newUser.password:new Date().getTime()+new Date().getMilliseconds();
     const savedUser = await newUser.save();
     console.log(newUser.selectedCountries);
     countryInsert.checkAndInsertCountryToScrpe(newUser.selectedCountries);
