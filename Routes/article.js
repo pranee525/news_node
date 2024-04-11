@@ -78,6 +78,7 @@ router.get('/articleForUser/:id', async (req, res) => {
 //get remaining articles for user by userid and last read articleid
 router.get('/getNextArticles/:userId/:articleId', async (req, res) => {
   try {
+    
     const articles = await articleController.getRemainingArticlesByUserId(req.params.userId,req.params.articleId);
     res.json(articles);
   } catch (error) {
