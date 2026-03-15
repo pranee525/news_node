@@ -22,6 +22,6 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-const User = mongoose.model('User', userSchema);
+const LegacyUser = mongoose.model('LegacyUser', userSchema);
 
-module.exports = User;
+module.exports = LegacyUser;
