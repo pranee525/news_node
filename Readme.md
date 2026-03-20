@@ -1,6 +1,6 @@
 # Headlinez News App - Node.js Backend
 
-A Node.js/Express backend for the Headlinez React Native news app with news aggregation, user management, and AI features.
+A Node.js/Express backend for the Headlinez React Native news app with news aggregation, user management.
 
 ## Features
 
