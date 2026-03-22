@@ -6,7 +6,7 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 8001;
 const MONGODB_URI = process.env.MONGODB_URI;
-//managed connection string
+
 // Middleware
 app.use(cors());
 app.use(express.json());
